@@ -11,6 +11,7 @@ The paper proposes a data-driven methodology to learn a low-dimensional actuatio
 - Authors: Luigi Marra, Guy Y. Cornejo Maceda, Andrea Meilán-Vila, Vanesa Guerrero, Salma Rashwan, Bernd R. Noack, Stefano Discetti, and Andrea Ianiro
 - Journal: Journal of Fluid Mechanics
 - Year: 2024
+- DOI: https://doi.org/10.1017/jfm.2024.593
 
 ## Key Features
 - Encoding using ISOMAP procedure for manifold learning from snapshots data of fluidic pinball with actuation.
@@ -24,18 +25,19 @@ Remember to download the dataset from Zenodo using the following link: https://z
 ### Dependencies
 Please download and install the following functions and toolboxes:
 
-1. **ISOMAP Function**
-   - Download from: https://www.mathworks.com/matlabcentral/fileexchange/62449-isomap-d-n_fcn-n_size-options
-(J. B. Tenenbaum, V. de Silva, J. C. Langford (2000).  A global geometric framework for nonlinear dimensionality reduction. Science 290 (5500): 2319-2323, 22 December 2000.)
-
-2. **Toolbox Image**
+1. **Toolbox Image**
    - Download from: Gabriel Peyre (2024). Toolbox image (https://www.mathworks.com/matlabcentral/fileexchange/16201-toolbox-image), MATLAB Central File Exchange. Recuperato luglio 23, 2024. Only consider the folder "toolbox_image"
 
 
-3. **L2_distance Function**
+2. **L2_distance Function**
    - Download from: https://viewer.mathworks.com/?viewer=plain_code&url=https%3A%2F%2Fww2.mathworks.cn%2Fmatlabcentral%2Fmlc-downloads%2Fdownloads%2F6ff224c7-d91d-460e-b695-086355a59386%2F0963789e-d6f8-46ce-ad06-ec3a9f5c8a91%2Ffiles%2FFSLib_v6.1_2018%2Flib%2Fdrtoolbox%2Ftechniques%2FL2_distance.m&embed=web. 
 (C) Laurens van der Maaten, Delft University of Technology
 
+----
+
+-- **IsoMap Function** --
+IsoMap Function has been downloaded from: https://www.mathworks.com/matlabcentral/fileexchange/62449-isomap-d-n_fcn-n_size-options
+(J. B. Tenenbaum, V. de Silva, J. C. Langford (2000).  A global geometric framework for nonlinear dimensionality reduction. Science 290 (5500): 2319-2323, 22 December 2000.)
 
 
 
