@@ -2,8 +2,8 @@
 % Description: Code of the article "Actuation manifold from snapshots data"
 % Authors: Luigi Marra, Guy Y. Cornejo Maceda, Andrea Meilán-Vila, Vanesa Guerrero, 
 % Salma Rashwan, Bernd R. Noack, Stefano Discetti, and Andrea Ianiro.
-% DOI: To be received
-% Dataset DOI: To be received
+% DOI: https://doi.org/10.1017/jfm.2024.593
+% Dataset DOI: 10.5281/zenodo.12802191.
 % GitHub: https://github.com/Lmarra1/Actuation-manifold-from-snapshot-data.git
 % Description: 
 % This script performs the reconstruction of the snapshots in the test
@@ -40,12 +40,11 @@ set(0, 'DefaultAxesTickLabelInterpreter', 'latex');  % LaTeX interpreter for tic
 
 
 %% Path to data directory
-% Update this path to the location where the data downloaded from Zenodo (DOI: [To be received]) is stored
-Data_path = "G:\Mi unidad\DRIVE\PhD\Submission JFM ISOMAP\OA dataset";
-% Data_path = "SPECIFY YOUR DATA PATH";
+% Update this path to the location where the data downloaded from Zenodo (DOI: 10.5281/zenodo.12802191) is stored
+Data_path = "SPECIFY YOUR DATA PATH";
 
 % Load grid and snapshot data from HDF5 files
-ReadH5(Data_path + "\TestDataset.h5");         % Load training dataset 3 (v-component snapshots)
+ReadH5(fullfile(Data_path, "TestDataset.h5"));         % Load training dataset 3 (v-component snapshots)
 p_t          = p;                % Kiki parameters test dataset
 b_t          = b;                % Actuation vector test dataset
 Cl_t         = Cl;               % Cl test dataset
@@ -54,12 +53,12 @@ v7_125_t     = v7_125;           % v(8,1.25) for test dataset
 v10_125_t    = v10_125;          % v(10,1.25) for test dataset
 U_t          = [Snap_u; Snap_v]; % Snapshots matrix test dataset
 
-ReadH5(Data_path + "\TrainingDataset_1.h5");   % Load training dataset 1 (Additional data)
-ReadH5(Data_path + "\Grid.h5");                % Load grid data (X_new and Y_new)
-ReadH5(Data_path + "\IsomapResults.h5");       % Isomap results for k_e = 40
-ReadH5(Data_path + "\TrainingDataset_2.h5");   % Load training dataset 2 (u-component snapshots)
-ReadH5(Data_path + "\TrainingDataset_3.h5");   % Load training dataset 3 (v-component snapshots)
-U = [Snap_u; Snap_v];                          % Snapshots matrix training dataset
+ReadH5(fullfile(Data_path, "TrainingDataset_1.h5"));   % Load training dataset 1 (Additional data)
+ReadH5(fullfile(Data_path, "Grid.h5"));                % Load grid data (X_new and Y_new)
+ReadH5(fullfile(Data_path, "IsomapResults.h5"));       % Isomap results for k_e = 40
+ReadH5(fullfile(Data_path, "TrainingDataset_2.h5"));   % Load training dataset 2 (u-component snapshots)
+ReadH5(fullfile(Data_path, "TrainingDataset_3.h5"));   % Load training dataset 3 (v-component snapshots)
+U = [Snap_u; Snap_v];                                  % Snapshots matrix training dataset
 
 
 nPts  = size(U,1)/2;
@@ -67,6 +66,7 @@ nSnap = size(U,2);
 
 %% Extract sensor information
 CaseSensor = 1;
+
 
 if CaseSensor == 1
     s1 = Cl;

@@ -2,8 +2,8 @@
 % Description: Code of the article "Actuation manifold from snapshots data"
 % Authors: Luigi Marra, Guy Y. Cornejo Maceda, Andrea Meilán-Vila, Vanesa Guerrero,
 % Salma Rashwan, Bernd R. Noack, Stefano Discetti, and Andrea Ianiro.
-% DOI: To be received
-% Dataset DOI: To be received
+% DOI: https://doi.org/10.1017/jfm.2024.593
+% Dataset DOI: 10.5281/zenodo.12802191.
 % GitHub: https://github.com/Lmarra1/Actuation-manifold-from-snapshot-data.git
 % Description:
 % This script performs the plot of the results of ISOMAP dimensionality reduction on a
@@ -51,10 +51,8 @@ set(0, 'DefaultAxesTickLabelInterpreter', 'latex');  % LaTeX interpreter for tic
 
 
 %% Load data for plotting
-% Update this path to the location where the data downloaded from Zenodo (DOI: [To be received]) is stored
-Data_path = "G:\Mi unidad\DRIVE\PhD\Submission JFM ISOMAP\OA dataset";
-% Data_path = "H:\Mi unidad\DRIVE\PhD\Submission JFM ISOMAP\OA dataset";
-% Data_path = "SPECIFY YOUR DATA PATH";
+% Update this path to the location where the data downloaded from Zenodo (DOI: 10.5281/zenodo.12802191) is stored
+Data_path = "SPECIFY YOUR DATA PATH";
 
 Fig_path = "ArticleFigures";  % Directory for saving figures
 if ~exist(Fig_path, 'dir')
@@ -72,10 +70,10 @@ else
 end
 
 % Load all data
-ReadH5(Data_path + "\Grid.h5");                       % Load the grid data
-ReadH5(Data_path + "\TrainingDataset_1.h5");          % Load the training dataset
-b_train = b(:,20:20:end);                             % Actuation inputs for training dataset
-ReadH5(Data_path + "\TestDataset.h5");                % Load the test dataset
+ReadH5(fullfile(Data_path, "Grid.h5"));                       % Load the grid data
+ReadH5(fullfile(Data_path, "TrainingDataset_1.h5"));          % Load the training dataset
+b_train = b(:,20:20:end);                                     % Actuation inputs for training dataset
+ReadH5(fullfile(Data_path, "TestDataset.h5"));                % Load the test dataset
 
 % Select the decoding method
 DecodingMethod = "MLP";                               % Decide between "KNN" and "MLP"
@@ -86,11 +84,11 @@ end
 
 % Load reconstructed snapshots
 % case 1
-ReadH5(Data_path + "\Reconstruction_" + DecodingMethod + "1.h5");        % Reconstruction case 1
+ReadH5(fullfile(Data_path, "Reconstruction_" + DecodingMethod + "1.h5"));        % Reconstruction case 1
 U_hat_1 = [Snap_u_hat; Snap_v_hat];
 
 % case 2
-ReadH5(Data_path + "\Reconstruction_" + DecodingMethod + "2.h5");        % Reconstruction case 2
+ReadH5(fullfile(Data_path, "Reconstruction_" + DecodingMethod + "2.h5"));        % Reconstruction case 2
 U_hat_2 = [Snap_u_hat; Snap_v_hat];
 
 % true snapshots

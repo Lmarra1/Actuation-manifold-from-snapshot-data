@@ -2,8 +2,8 @@
 % Description: Code of the article "Actuation manifold from snapshots data"
 % Authors: Luigi Marra, Guy Y. Cornejo Maceda, Andrea Meilán-Vila, Vanesa Guerrero,
 % Salma Rashwan, Bernd R. Noack, Stefano Discetti, and Andrea Ianiro.
-% DOI: To be received
-% Dataset DOI: To be received
+% DOI: https://doi.org/10.1017/jfm.2024.593
+% Dataset DOI: 10.5281/zenodo.12802191.
 % GitHub: https://github.com/Lmarra1/Actuation-manifold-from-snapshot-data.git
 % Description:
 % This script performs the plot of the results of ISOMAP dimensionality reduction on a
@@ -32,9 +32,7 @@ set(0, 'DefaultAxesTickLabelInterpreter', 'latex');  % LaTeX interpreter for tic
 
 %% Load data for plotting
 % Update this path to the location where the data downloaded from Zenodo (DOI: [To be received]) is stored
-% Data_path = "G:\Mi unidad\DRIVE\PhD\Submission JFM ISOMAP\OA dataset";
-Data_path = "H:\Mi unidad\DRIVE\PhD\Submission JFM ISOMAP\OA dataset";
-% Data_path = "SPECIFY YOUR DATA PATH";
+Data_path = "SPECIFY YOUR DATA PATH";
 
 Fig_path = "ArticleFigures";
 if ~exist(Fig_path, 'dir')
@@ -50,10 +48,10 @@ else
     addpath(genpath("toolbox_image"));
 end
 
-ReadH5(Data_path + "\TrainingDataset_1.h5");          % Load the training dataset data
-ReadH5(Data_path + "\IsomapVarke.h5");                % Load the initial data needed for optimal k_e selection
-ReadH5(Data_path + "\IsomapResults.h5");              % Load the Isomap results for k_e = 40
-ReadH5(Data_path + "\Grid.h5");                       % Load the grid data
+ReadH5(fullfile(Data_path, "TrainingDataset_1.h5"));          % Load the training dataset data
+ReadH5(fullfile(Data_path, "IsomapVarke.h5"));                % Load the initial data needed for optimal k_e selection
+ReadH5(fullfile(Data_path, "IsomapResults.h5"));              % Load the Isomap results for k_e = 40
+ReadH5(fullfile(Data_path, "Grid.h5"));                       % Load the grid data
 
 
 %% Other general variables
@@ -397,7 +395,7 @@ end
 % Perform pseudomodes LIC
 saveFig = false;
 
-cmap = redblue(16);
+cmap = jet(16);
 xsq = linspace(-5,20,300);
 ysq = linspace(-5,5 ,300);
 [Xsq,Ysq] = meshgrid(xsq,ysq);

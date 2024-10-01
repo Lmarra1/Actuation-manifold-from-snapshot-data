@@ -1,4 +1,4 @@
-function [Y, R, E, Dg] = IsoMap(D, n_fcn, n_size, options)
+function [Y, R, Dg] = Isomap(D, n_fcn, n_size, options)
 
 % ISOMAP   Computes Isomap embedding using the algorithm of 
 %             Tenenbaum, de Silva, and Langford (2000). 

@@ -2,8 +2,8 @@
 % Description: Code of the article "Actuation manifold from snapshots data"
 % Authors: Luigi Marra, Guy Y. Cornejo Maceda, Andrea Meilán-Vila, Vanesa Guerrero, 
 % Salma Rashwan, Bernd R. Noack, Stefano Discetti, and Andrea Ianiro.
-% DOI: To be received
-% Dataset DOI: To be received
+% DOI: https://doi.org/10.1017/jfm.2024.593 
+% Dataset DOI: 10.5281/zenodo.12802191.
 % GitHub: https://github.com/Lmarra1/Actuation-manifold-from-snapshot-data.git
 % Description: 
 % This script performs ISOMAP dimensionality reduction on a 
@@ -44,15 +44,14 @@ clc;
 warning off; % Disable warnings
 
 %% Path to data directory
-% Update this path to the location where the data downloaded from Zenodo (DOI: [To be received]) is stored
-Data_path = "G:\Mi unidad\DRIVE\PhD\Submission JFM ISOMAP\OA dataset";
-% Data_path = "SPECIFY YOUR DATA PATH";
+% Update this path to the location where the data downloaded from Zenodo (DOI: 10.5281/zenodo.12802191) is stored
+Data_path = "SPECIFY YOUR DATA PATH";
 
 % Load grid and snapshot data from HDF5 files
-ReadH5(Data_path + "\Grid.h5");                % Load grid data (X_new and Y_new)
-ReadH5(Data_path + "\TrainingDataset_1.h5");   % Load training dataset 1 (Additional data)
-% ReadH5(Data_path + "\TrainingDataset_2.h5"); % Load training dataset 2 (u-component snapshots)
-% ReadH5(Data_path + "\TrainingDataset_3.h5"); % Load training dataset 3 (v-component snapshots)
+ReadH5(fullfile(Data_path, "Grid.h5"));                % Load grid data (X_new and Y_new)
+ReadH5(fullfile(Data_path, "TrainingDataset_1.h5"));   % Load training dataset 1 (Additional data)
+ReadH5(fullfile(Data_path, "TrainingDataset_2.h5")); % Load training dataset 2 (u-component snapshots)
+ReadH5(fullfile(Data_path, "TrainingDataset_3.h5")); % Load training dataset 3 (v-component snapshots)
 
 %% Create snapshots matrix
 % Combine u and v components into a single matrix U
@@ -80,13 +79,13 @@ ISOoptions.verbose = 1; % display progress report
 for index = 1:length(ke)
 
     % Perform ISOMAP dimensionality reduction
-    [Y, R, ~, Dg] = IsoMap(D, 'k', ke(index), ISOoptions);
+    [Y, R, Dg] = IsoMap(D, 'k', ke(index), ISOoptions);
     
     % Store results in structure for further analysis
     ISOMAP.Gamma.("k" + string(ke(index))) = Y.coords{10, 1};   % Low-dimensional embedding coordinates
     ISOMAP.R.("k" + string(ke(index)))     = R;                 % Residual variance of the embedding
     ISOMAP.Dg.("k" + string(ke(index)))    = Dg;                % Geodesic distance matrix
-    ISOMAP.Phi.("k" + string(ke(index)))   = U*ISOMAP.Gamma.("k" + string(ke(index)))./(sqrt(sum(Gamma.^2, 2))).'; % Pseudomodes                 
+    ISOMAP.Phi.("k" + string(ke(index)))   = (U*ISOMAP.Gamma.("k" + string(ke(index))).')./(sqrt(sum(ISOMAP.Gamma.("k" + string(ke(index))).^2, 2))); % Pseudomodes                 
     
     % Display progress for the current k-value
     disp("------------------------>  k: " + string(ke(index)));
